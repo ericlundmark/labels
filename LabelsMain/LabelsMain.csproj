@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D9CDF4BF-D6F5-4E4B-AE6D-293B3D1262F6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LabelsMain</RootNamespace>
+    <AssemblyName>LabelsMain</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Convert\ConverterFactory.cs" />
+    <Compile Include="Convert\IConverter.cs" />
+    <Compile Include="Create\ILabelFactory.cs" />
+    <Compile Include="Convert\IntermecConverter.cs" />
+    <Compile Include="Create\IntermecFactory.cs" />
+    <Compile Include="Create\LabelFactory.cs" />
+    <Compile Include="Convert\ZebraConverter.cs" />
+    <Compile Include="Models\Label.cs" />
+    <Compile Include="Models\LabelItem.cs" />
+    <Compile Include="Models\Tokens\Token.cs" />
+    <Compile Include="Create\ZebraFactory.cs" />
+    <Compile Include="Models\LabelType.cs" />
+    <Compile Include="Models\Tokens\TokenType.cs" />
+    <Compile Include="Models\Items\Box.cs" />
+    <Compile Include="Models\Items\Circle.cs" />
+    <Compile Include="Models\Items\Diagonal.cs" />
+    <Compile Include="Parse\IParser.cs" />
+    <Compile Include="Models\Items\TextField.cs" />
+    <Compile Include="Parse\ZebraParser.cs" />
+    <Compile Include="Scan\IntermecScanner.cs" />
+    <Compile Include="Scan\IScanner.cs" />
+    <Compile Include="Scan\ScannerFactory.cs" />
+    <Compile Include="Scan\ZebraScanner.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZebraCommands\FieldCommand.cs" />
+    <Compile Include="Visitor\IVisitor.cs" />
+    <Compile Include="ZebraCommands\IZebraCommand.cs" />
+    <Compile Include="ZebraCommands\ZebraCommand.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelConverter", "LabelConverter\LabelConverter.csproj", "{60812053-6554-4948-9643-47260AE65AA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelConverter.UnitTests", "LabelConverter.UnitTests\LabelConverter.UnitTests.csproj", "{776FCC92-15BD-4AFE-95E1-CAF63F91750E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelsMain", "LabelsMain\LabelsMain.csproj", "{D9CDF4BF-D6F5-4E4B-AE6D-293B3D1262F6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60812053-6554-4948-9643-47260AE65AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60812053-6554-4948-9643-47260AE65AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60812053-6554-4948-9643-47260AE65AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60812053-6554-4948-9643-47260AE65AA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{776FCC92-15BD-4AFE-95E1-CAF63F91750E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{776FCC92-15BD-4AFE-95E1-CAF63F91750E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{776FCC92-15BD-4AFE-95E1-CAF63F91750E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{776FCC92-15BD-4AFE-95E1-CAF63F91750E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9CDF4BF-D6F5-4E4B-AE6D-293B3D1262F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9CDF4BF-D6F5-4E4B-AE6D-293B3D1262F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9CDF4BF-D6F5-4E4B-AE6D-293B3D1262F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9CDF4BF-D6F5-4E4B-AE6D-293B3D1262F6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
