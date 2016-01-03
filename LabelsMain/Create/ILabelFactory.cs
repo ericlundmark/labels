@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using LabelsMain.Models.Tokens;
 
-namespace LabelsMain.Factory
+namespace LabelsMain.Create
 {
     public interface ILabelFactory
     {

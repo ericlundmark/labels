@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using LabelsMain.Factory;
+using LabelsMain.Models.Tokens;
 
 namespace LabelsMain.Scan
 {

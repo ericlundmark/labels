@@ -1,4 +1,6 @@
-﻿namespace LabelsMain.Factory
+﻿using LabelsMain.Models.Tokens;
+
+namespace LabelsMain.Convert
 {
     public interface IConverter
     {

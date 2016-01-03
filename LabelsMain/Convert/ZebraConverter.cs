@@ -1,6 +1,7 @@
 ﻿using System;
+using LabelsMain.Models.Tokens;
 
-namespace LabelsMain.Factory
+namespace LabelsMain.Convert
 {
     internal class ZebraConverter : IConverter
     {

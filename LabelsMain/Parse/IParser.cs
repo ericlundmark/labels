@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using LabelsMain.Factory;
 using LabelsMain.Models;
+using LabelsMain.Models.Tokens;
 
 namespace LabelsMain.Parse
 {
-    internal interface IParser
+    public interface IParser
     {
         Label Parse(IEnumerable<Token> tokens);
     }

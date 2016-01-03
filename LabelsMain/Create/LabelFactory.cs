@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Data.Entity;
+using LabelsMain.Factory;
 using LabelsMain.Models;
 
-namespace LabelsMain.Factory
+namespace LabelsMain.Create
 {
     public class LabelFactory
     {

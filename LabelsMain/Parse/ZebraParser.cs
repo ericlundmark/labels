@@ -3,10 +3,11 @@ using System.Drawing;
 using LabelsMain.Factory;
 using LabelsMain.Models;
 using LabelsMain.Models.Items;
+using LabelsMain.Models.Tokens;
 
 namespace LabelsMain.Parse
 {
-    internal class ZebraParser : IParser
+    public class ZebraParser : IParser
     {
         public Point Origin { get; set; }
         public Point Home { get; set; }
@@ -74,11 +75,11 @@ namespace LabelsMain.Parse
         {
             var x = Origin.X;
             var y = Origin.Y;
-            var width = token.ParameterAsInt(0);
-            var height = token.ParameterAsInt(1);
-            var thickness = token.ParameterAsInt(2);
-            var color = token.Parameters[3].Equals("W") ? Color.White : Color.Black;
-            var orientation = token.Parameters[4].Equals("L") ? "L" : "R";
+            var width = token.ParameterOrDefault(0, 1);
+            var height = token.ParameterOrDefault(1, 1);
+            var thickness = token.ParameterOrDefault(2, 1);
+            var color = token.ParameterOrDefault(3, "B").Equals("W") ? Color.White : Color.Black;
+            var orientation = token.ParameterOrDefault(4, "R").Equals("L") ? "L" : "R";
             return new Diagonal(x, y, width, height, thickness, color, orientation);
         }
 
@@ -86,11 +87,12 @@ namespace LabelsMain.Parse
         {
             var x = Origin.X;
             var y = Origin.Y;
-            var width = token.ParameterAsInt(0);
-            var height = token.ParameterAsInt(1);
-            var thickness = token.ParameterAsInt(2);
-            var color = token.Parameters[3].Equals("W") ? Color.White : Color.Black;
-            return new Box(x, y, width, height, thickness, color);
+            var width = token.ParameterOrDefault(0, 1);
+            var height = token.ParameterOrDefault(1, 1);
+            var thickness = token.ParameterOrDefault(2, 1);
+            var color = token.ParameterOrDefault(3, "B").Equals("W") ? Color.White : Color.Black;
+            var rounding = token.ParameterOrDefault(4, 0);
+            return new Box(x, y, width, height, thickness, color, rounding);
         }
 
         private Circle CreateCircle(Token token)

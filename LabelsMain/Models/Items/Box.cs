@@ -3,23 +3,25 @@ using LabelsMain.Models;
 
 namespace LabelsMain.Parse
 {
-    internal class Box : LabelItem
+    public class Box : LabelItem
     {
-        private Color _color;
-        private int _height;
-        private int _thickness;
-        private int _width;
-        private int _x;
-        private int _y;
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public int Thickness { get; set; }
+        public Color Color { get; set; }
+        public int Rounding { get; set; }
 
-        public Box(int x, int y, int width, int height, int thickness, Color color)
+        public Box(int x, int y, int width, int height, int thickness, Color color, int rounding)
         {
-            _x = x;
-            _y = y;
-            _width = width;
-            _height = height;
-            _thickness = thickness;
-            _color = color;
+            X = x;
+            Y = y;
+            Width = width;
+            Height = height;
+            Thickness = thickness;
+            Color = color;
+            Rounding = rounding;
         }
     }
 }

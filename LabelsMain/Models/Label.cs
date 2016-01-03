@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace LabelsMain.Models
 {
-    class Label
+    public class Label
     {
         public IList<LabelItem> Items { get; set; }
         public double Width { get; set; }
         public double Height { get; set; }
+
+        public Label()
+        {
+            Items = new List<LabelItem>();
+        }
     }
 }

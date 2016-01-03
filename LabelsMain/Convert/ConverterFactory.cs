@@ -1,7 +1,8 @@
 ﻿using System;
+using LabelsMain.Factory;
 using LabelsMain.Models;
 
-namespace LabelsMain.Factory
+namespace LabelsMain.Convert
 {
     internal class ConverterFactory
     {

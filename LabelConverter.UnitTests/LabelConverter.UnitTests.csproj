@@ -42,6 +42,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
@@ -93,6 +94,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parse\FluentZebraBuilder.cs" />
+    <Compile Include="Parse\ZebraParserTests.cs" />
     <Compile Include="Scan\IntermecScannerTests.cs" />
     <Compile Include="Scan\ZebraScannerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,14 +1,13 @@
-﻿namespace LabelsMain.Factory
+﻿using System;
+using LabelsMain.Models.Tokens;
+
+namespace LabelsMain.Convert
 {
     internal class IntermecConverter : IConverter
     {
-        public IntermecConverter()
-        {
-        }
-
         public string Convert(Token token)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }
