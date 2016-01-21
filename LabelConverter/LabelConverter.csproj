@@ -209,6 +209,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LabelController.cs" />
+    <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -217,6 +218,10 @@
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\CreateLabelRequest.cs" />
     <Compile Include="Models\LabelViewModel.cs" />
+    <Compile Include="Models\Requests\Label.cs" />
+    <Compile Include="Models\Requests\Template.cs" />
+    <Compile Include="Models\Responses\Label.cs" />
+    <Compile Include="Models\Responses\Template.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -292,6 +297,10 @@
     <ProjectReference Include="..\LabelsMain\LabelsMain.csproj">
       <Project>{D9CDF4BF-D6F5-4E4B-AE6D-293B3D1262F6}</Project>
       <Name>LabelsMain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{EBF73383-8B51-48AD-89AE-78D47DE36CA6}</Project>
+      <Name>Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

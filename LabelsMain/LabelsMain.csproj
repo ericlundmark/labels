@@ -59,6 +59,7 @@
     <Compile Include="Convert\ZebraConverter.cs" />
     <Compile Include="Models\Label.cs" />
     <Compile Include="Models\LabelItem.cs" />
+    <Compile Include="Models\Template.cs" />
     <Compile Include="Models\Tokens\Token.cs" />
     <Compile Include="Create\ZebraFactory.cs" />
     <Compile Include="Models\LabelType.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Scan\IntermecScanner.cs" />
     <Compile Include="Scan\IScanner.cs" />
     <Compile Include="Scan\ScannerFactory.cs" />
+    <Compile Include="Scan\TecScanner.cs" />
     <Compile Include="Scan\ZebraScanner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZebraCommands\FieldCommand.cs" />

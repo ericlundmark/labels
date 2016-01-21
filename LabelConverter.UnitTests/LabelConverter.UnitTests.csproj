@@ -94,9 +94,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parse\FluentIntermecBuilder.cs" />
     <Compile Include="Parse\FluentZebraBuilder.cs" />
+    <Compile Include="Parse\IntermecParserTests.cs" />
     <Compile Include="Parse\ZebraParserTests.cs" />
     <Compile Include="Scan\IntermecScannerTests.cs" />
+    <Compile Include="Scan\TecScannerTests.cs" />
     <Compile Include="Scan\ZebraScannerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />

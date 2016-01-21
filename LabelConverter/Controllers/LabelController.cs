@@ -11,7 +11,7 @@ namespace LabelConverter.Controllers
         {
         }
 
-        public Task<LabelViewModel> Create(CreateLabelRequest labelReq)
+        public Task<LabelViewModel> CreateAsync(CreateLabelRequest labelReq)
         {
             return null;
         }
