@@ -10,7 +10,7 @@ namespace LabelsMain.Scan
         public IEnumerable<Token> Scan(string label)
         {
             label = Regex.Replace(label, @"\t|\n|\r", "");
-            var rawCommands = label.Split('^').Where(c => !c.Equals(""));
+            var rawCommands = label.Split('^', '~').Where(c => !c.Equals(""));
             return rawCommands.Select(ExtractToken);
         }
 

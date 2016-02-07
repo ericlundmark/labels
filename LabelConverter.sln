@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelsMain", "LabelsMain\La
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{EBF73383-8B51-48AD-89AE-78D47DE36CA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelConverter.IntegrationTests", "LabelConverter.IntegrationTests\LabelConverter.IntegrationTests.csproj", "{C48B735C-8C8A-41F7-83C5-44124295CB2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{EBF73383-8B51-48AD-89AE-78D47DE36CA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBF73383-8B51-48AD-89AE-78D47DE36CA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBF73383-8B51-48AD-89AE-78D47DE36CA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C48B735C-8C8A-41F7-83C5-44124295CB2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C48B735C-8C8A-41F7-83C5-44124295CB2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C48B735C-8C8A-41F7-83C5-44124295CB2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C48B735C-8C8A-41F7-83C5-44124295CB2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

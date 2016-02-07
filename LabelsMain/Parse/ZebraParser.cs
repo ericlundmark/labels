@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using LabelsMain.Factory;
+using System.Linq;
+using System.Text;
 using LabelsMain.Models;
 using LabelsMain.Models.Items;
 using LabelsMain.Models.Tokens;
@@ -9,6 +11,13 @@ namespace LabelsMain.Parse
 {
     public class ZebraParser : IParser
     {
+        private readonly List<Token> _unSupported;
+
+        public ZebraParser()
+        {
+            _unSupported = new List<Token>();
+        }
+
         public Point Origin { get; set; }
         public Point Home { get; set; }
 
@@ -20,7 +29,13 @@ namespace LabelsMain.Parse
             {
                 Execute(token, label);
             }
-            return label;
+            if (_unSupported.Count <= 0) return label;
+            var sb = new StringBuilder();
+            foreach (var token in _unSupported.GroupBy(p => p.Command).Select(g => g.First()).ToList())
+            {
+                sb.Append(token.Command + Environment.NewLine);
+            }
+            throw new ArgumentException(sb.ToString());
         }
 
         private void Execute(Token token, Label label)
@@ -30,36 +45,43 @@ namespace LabelsMain.Parse
                 case "FD":
                     var tf = CreateTextField(token);
                     label.Items.Add(tf);
-                    return;
+                    break;
                 case "FO":
-                    Origin = new Point(Home.X + token.ParameterAsInt(0), Home.Y + token.ParameterAsInt(1));
-                    return;
+                    Origin = new Point(Home.X + token.ParameterOrDefault(0, 0), Home.Y + token.ParameterOrDefault(1, 0));
+                    break;
                 case "FS":
                     ResetFieldDefinition();
-                    return;
+                    break;
                 case "FT":
-                    Origin = new Point(token.ParameterAsInt(0), token.ParameterAsInt(1));
-                    return;
+                    Origin = new Point(token.ParameterOrDefault(0, 0), token.ParameterOrDefault(1, 0));
+                    break;
                 case "GB":
                     var box = CreateBox(token);
                     label.Items.Add(box);
-                    return;
+                    break;
                 case "GC":
                     var circle = CreateCircle(token);
                     label.Items.Add(circle);
-                    return;
+                    break;
                 case "GD":
                     var diagonal = CreateDiagonal(token);
                     label.Items.Add(diagonal);
-                    return;
+                    break;
                 case "LH":
-                    var x = token.ParameterAsInt(0);
-                    var y = token.ParameterAsInt(1);
+                    var x = token.ParameterOrDefault(0, 0);
+                    var y = token.ParameterOrDefault(1, 0);
                     Home = new Point(x, y);
-                    return;
+                    break;
                 case "PW":
-                    label.Width = token.ParameterAsInt(0);
-                    return;
+                    label.Width = token.ParameterOrDefault(0, 0);
+                    break;
+                case "XA":
+                    break;
+                case "XZ":
+                    break;
+                default:
+                    _unSupported.Add(token);
+                    break;
             }
         }
 
@@ -99,8 +121,8 @@ namespace LabelsMain.Parse
         {
             var x = Origin.X;
             var y = Origin.Y;
-            var diameter = token.ParameterAsInt(0);
-            var thickness = token.ParameterAsInt(1);
+            var diameter = token.ParameterOrDefault(0, 0);
+            var thickness = token.ParameterOrDefault(1, 0);
             var color = token.Parameters[3].Equals("W") ? Color.White : Color.Black;
             var circle = new Circle(x, y, diameter, thickness, color);
             return circle;

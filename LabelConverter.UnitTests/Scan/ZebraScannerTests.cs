@@ -50,5 +50,14 @@ namespace LabelConverter.UnitTests.Scan
             Assert.AreEqual("arg1", token.Parameters[0]);
             Assert.AreEqual("arg2", token.Parameters[1]);
         }
+
+        [TestMethod]
+        public void Parse_Tilde_ExtractedAsCommand()
+        {
+            var parser = new ZebraScanner();
+            var tokens = parser.Scan(@"~JR");
+            var token = tokens.First();
+            Assert.AreEqual("JR", token.Command);
+        }
     }
 }

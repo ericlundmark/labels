@@ -74,5 +74,17 @@ namespace LabelConverter.UnitTests.Parse
             Assert.AreEqual(0, box.X);
             Assert.AreEqual(0, box.Y);
         }
+
+        [TestMethod]
+        public void Parse_StartAndEndCommand_Accepted()
+        {
+            var builder = new FluentZebraBuilder();
+            var tokens = builder.Build();
+
+            var parser = new ZebraParser();
+            var label = parser.Parse(tokens);
+            Assert.IsNotNull(label);
+            Assert.AreEqual(0, label.Items.Count);
+        }
     }
 }
