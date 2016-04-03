@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using LabelsMain.Factory;
-using LabelsMain.Models.Tokens;
+﻿using System.Threading.Tasks;
+using LabelsMain.Models;
+using LabelsMain.Parse;
+using LabelsMain.Scan;
 
 namespace LabelsMain.Create
 {
     public class ZebraFactory : ILabelFactory
     {
-        public Task<string> CreateAsync(IList<Token> tokens)
+        public async Task<Label> CreateAsync(string label)
         {
-            throw new NotImplementedException();
+            var scanner = new ZebraScanner();
+            var tokens = scanner.Scan(label);
+            var parser = new ZebraParser();
+            var concreteLabel = parser.Parse(tokens);
+            return await Task.FromResult(concreteLabel);
         }
     }
 }

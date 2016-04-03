@@ -13,7 +13,7 @@
 
         public T ParameterOrDefault<T>(int index, T defaultValue)
         {
-            return Parameters.Length <= index ? defaultValue : (T)System.Convert.ChangeType(Parameters[index], typeof(T));
+            return Parameters.Length <= index || Parameters[index].Equals("") ? defaultValue : (T)System.Convert.ChangeType(Parameters[index], typeof(T));
         }
     }
 }

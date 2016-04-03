@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using LabelsMain.Models.Tokens;
+﻿using System.Threading.Tasks;
+using LabelsMain.Models;
 
 namespace LabelsMain.Create
 {
     public interface ILabelFactory
     {
-        Task<string> CreateAsync(IList<Token> tokens);
+        Task<Label> CreateAsync(string label);
     }
 }

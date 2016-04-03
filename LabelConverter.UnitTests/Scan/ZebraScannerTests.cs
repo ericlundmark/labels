@@ -29,7 +29,7 @@ namespace LabelConverter.UnitTests.Scan
         public void Parse_OneCommandWithTwoParams_TwoParams()
         {
             var parser = new ZebraScanner();
-            var tokens = parser.Scan(@"^AAarg1,arg2");
+            var tokens = parser.Scan(@"^BBarg1,arg2");
             Assert.AreEqual(2, tokens.First().Parameters.Count());
         }
 
@@ -37,16 +37,36 @@ namespace LabelConverter.UnitTests.Scan
         public void Parse_OneCommandWithTwoParams_CommandExtracted()
         {
             var parser = new ZebraScanner();
-            var tokens = parser.Scan(@"^AAarg1,arg2");
-            Assert.AreEqual("AA", tokens.First().Command);
+            var tokens = parser.Scan(@"^BBarg1,arg2");
+            Assert.AreEqual("BB", tokens.First().Command);
         }
 
         [TestMethod]
         public void Parse_OneCommandWithTwoParams_ParamsExtracted()
         {
             var parser = new ZebraScanner();
-            var tokens = parser.Scan(@"^AAarg1,arg2");
+            var tokens = parser.Scan(@"^BBarg1,arg2");
             var token = tokens.First();
+            Assert.AreEqual("arg1", token.Parameters[0]);
+            Assert.AreEqual("arg2", token.Parameters[1]);
+        }
+
+        [TestMethod]
+        public void Parse_OneLetterCommand_CommandExtracted()
+        {
+            var parser = new ZebraScanner();
+            var tokens = parser.Scan(@"^Aarg1,arg2");
+            var token = tokens.First();
+            Assert.AreEqual("A", token.Command);
+        }
+
+        [TestMethod]
+        public void Parse_OneLetterCommand_ParametersExtracted()
+        {
+            var parser = new ZebraScanner();
+            var tokens = parser.Scan(@"^Aarg1,arg2");
+            var token = tokens.First();
+            Assert.AreEqual("A", token.Command);
             Assert.AreEqual("arg1", token.Parameters[0]);
             Assert.AreEqual("arg2", token.Parameters[1]);
         }

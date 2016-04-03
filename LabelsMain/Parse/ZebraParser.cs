@@ -18,13 +18,14 @@ namespace LabelsMain.Parse
             _unSupported = new List<Token>();
         }
 
-        public Point Origin { get; set; }
+
         public Point Home { get; set; }
+        public FieldContext FieldContext { get; set; }
 
         public Label Parse(IEnumerable<Token> tokens)
         {
             var label = new Label();
-            Origin = new Point(0, 0);
+            FieldContext = new FieldContext(new Font("A", Orientation.Normal, 5, 9));
             foreach (var token in tokens)
             {
                 Execute(token, label);
@@ -42,18 +43,47 @@ namespace LabelsMain.Parse
         {
             switch (token.Command)
             {
+                case "A":
+                    SetFont(token);
+                    break;
+                case "B1":
+                    break;
+                case "BY":
+                    SetBarcodeDefaults(token);
+                    break;
+                case "BC":
+                    label.Items.Add(CreateBarCode(token));
+                    break;
+                case "FR":
+                    break;
+                case "FW":
+                    var orientation = token.ParameterOrDefault(0, "");
+                    if (orientation.Equals(""))
+                    {
+                        break;
+                    }
+                    FieldContext.Orientation = orientation;
+                    break;
                 case "FD":
                     var tf = CreateTextField(token);
                     label.Items.Add(tf);
+                    FieldContext.ResetFont();
                     break;
                 case "FO":
-                    Origin = new Point(Home.X + token.ParameterOrDefault(0, 0), Home.Y + token.ParameterOrDefault(1, 0));
+                    FieldContext.Origin = new Point(Home.X + token.ParameterOrDefault(0, 0), Home.Y + token.ParameterOrDefault(1, 0));
+                    break;
+                case "FX":
+                    break;
+                case "CF":
+                    FieldContext.DefaultFont.Name = token.ParameterOrDefault(0, "A");
+                    FieldContext.DefaultFont.Height = token.ParameterOrDefault(1, FieldContext.DefaultFont.Height);
+                    FieldContext.DefaultFont.Width = token.ParameterOrDefault(2, FieldContext.DefaultFont.Width);
                     break;
                 case "FS":
                     ResetFieldDefinition();
                     break;
                 case "FT":
-                    Origin = new Point(token.ParameterOrDefault(0, 0), token.ParameterOrDefault(1, 0));
+                    FieldContext.Origin = new Point(token.ParameterOrDefault(0, 0), token.ParameterOrDefault(1, 0));
                     break;
                 case "GB":
                     var box = CreateBox(token);
@@ -79,58 +109,107 @@ namespace LabelsMain.Parse
                     break;
                 case "XZ":
                     break;
+                case "PO":
+                    label.Rotation = token.ParameterOrDefault(0, "N").Equals("I") ? 180 : 0;
+                    break;
                 default:
                     _unSupported.Add(token);
                     break;
             }
         }
 
-        private TextField CreateTextField(Token token)
+        private void SetBarcodeDefaults(Token token)
         {
-            var x = Origin.X;
-            var y = Origin.Y;
-            var text = token.Parameters[0];
-            return new TextField();
+            var width = token.ParameterOrDefault(0,2);
+            var ratio = token.ParameterOrDefault(1,2.0);
+            var height = token.ParameterOrDefault(2,10);
+            FieldContext.BarcodeFieldDefault = new BarcodeFieldDefault(width,ratio,height);
+        }
+
+        private LabelItem CreateBarCode(Token token)
+        {
+            var x = FieldContext.Origin.X;
+            var y = FieldContext.Origin.Y;
+            var or = GetFontOrientation(token.ParameterOrDefault(0, FieldContext.Orientation));
+            var height = token.ParameterOrDefault(1, FieldContext.BarcodeFieldDefault.Height);
+            var interpretation = token.ParameterOrDefault(3, "Y").Equals("Y");
+            var interpretationPos = token.ParameterOrDefault(4, "N").Equals("N") ? InterpretationLocation.Below : InterpretationLocation.Above;
+            var checkDigit = token.ParameterOrDefault(5, "N").Equals("Y");
+            return new Barcode(new Point(x,y), BarcodeType.Code128, or, height,FieldContext.BarcodeFieldDefault.Width, interpretation, interpretationPos, checkDigit);
+        }
+
+        private LabelItem CreateTextField(Token token)
+        {
+            var x = FieldContext.Origin.X;
+            var y = FieldContext.Origin.Y;
+            var font = FieldContext.Font;
+            var name = font.Name;
+            var orientation = font.Orientation;
+            var width = font.Width;
+            var height = font.Height;
+            var data = token.ParameterOrDefault(0, "");
+            return new TextField(new Point(x, y), name, orientation, width, height, data);
+        }
+
+        private void SetFont(Token token)
+        {
+
+            var font = token.ParameterOrDefault(0, "A");
+            var width = token.ParameterOrDefault(1, 12);
+            var height = token.ParameterOrDefault(2, 15);
+            var orientation = GetFontOrientation(token.ParameterOrDefault(3, FieldContext.Orientation));
+            FieldContext.Font = new Font(font, orientation, width, height);
+        }
+
+        private Orientation GetFontOrientation(string orientation)
+        {
+            switch (orientation)
+            {
+                case "N":
+                    return Orientation.Normal;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private Diagonal CreateDiagonal(Token token)
         {
-            var x = Origin.X;
-            var y = Origin.Y;
+            var x = FieldContext.Origin.X;
+            var y = FieldContext.Origin.Y;
             var width = token.ParameterOrDefault(0, 1);
             var height = token.ParameterOrDefault(1, 1);
             var thickness = token.ParameterOrDefault(2, 1);
             var color = token.ParameterOrDefault(3, "B").Equals("W") ? Color.White : Color.Black;
             var orientation = token.ParameterOrDefault(4, "R").Equals("L") ? "L" : "R";
-            return new Diagonal(x, y, width, height, thickness, color, orientation);
+            return new Diagonal(new Point(x, y), width, height, thickness, color, orientation);
         }
 
         private Box CreateBox(Token token)
         {
-            var x = Origin.X;
-            var y = Origin.Y;
+            var x = FieldContext.Origin.X;
+            var y = FieldContext.Origin.Y;
             var width = token.ParameterOrDefault(0, 1);
             var height = token.ParameterOrDefault(1, 1);
             var thickness = token.ParameterOrDefault(2, 1);
             var color = token.ParameterOrDefault(3, "B").Equals("W") ? Color.White : Color.Black;
             var rounding = token.ParameterOrDefault(4, 0);
-            return new Box(x, y, width, height, thickness, color, rounding);
+            return new Box(new Point(x, y), width, height, thickness, color, rounding);
         }
 
         private Circle CreateCircle(Token token)
         {
-            var x = Origin.X;
-            var y = Origin.Y;
+            var x = FieldContext.Origin.X;
+            var y = FieldContext.Origin.Y;
             var diameter = token.ParameterOrDefault(0, 0);
             var thickness = token.ParameterOrDefault(1, 0);
             var color = token.Parameters[3].Equals("W") ? Color.White : Color.Black;
-            var circle = new Circle(x, y, diameter, thickness, color);
+            var circle = new Circle(new Point(x, y), diameter, thickness, color);
             return circle;
         }
 
         private void ResetFieldDefinition()
         {
-            Origin = new Point(0, 0);
+            FieldContext.Reset();
         }
     }
 }

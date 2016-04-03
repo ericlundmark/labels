@@ -40,5 +40,17 @@ namespace LabelConverter.UnitTests.Parse
             _tokens.Add(new Token("FS"));
             return this;
         }
+
+        public FluentZebraBuilder Invert()
+        {
+            _tokens.Add(new Token("PO", new[] { "I" }));
+            return this;
+        }
+
+        public FluentZebraBuilder Font()
+        {
+            _tokens.Add(new Token("A"));
+            return this;
+        }
     }
 }

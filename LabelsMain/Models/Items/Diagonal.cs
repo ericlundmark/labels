@@ -1,13 +1,13 @@
 ﻿using System.Drawing;
+using LabelsMain.Printers;
 
 namespace LabelsMain.Models.Items
 {
-    internal class Diagonal : LabelItem
+    public class Diagonal : LabelItem
     {
-        public Diagonal(int x, int y, int width, int height, int thickness, Color color, string orientation)
+        public Diagonal(Point point, int width, int height, int thickness, Color color, string orientation)
         {
-            X = x;
-            Y = y;
+            Point = point;
             Width = width;
             Height = height;
             Thickness = thickness;
@@ -15,12 +15,16 @@ namespace LabelsMain.Models.Items
             Orientation = orientation;
         }
 
-        public int X { get; set; }
-        public int Y { get; set; }
+        public Point Point { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
         public int Thickness { get; set; }
         public Color Color { get; set; }
         public string Orientation { get; set; }
+
+        public override void Print(IPrinter printer)
+        {
+            printer.Print(this);
+        }
     }
 }

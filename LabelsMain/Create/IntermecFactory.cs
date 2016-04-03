@@ -8,18 +8,9 @@ namespace LabelsMain.Create
 {
     public class IntermecFactory : ILabelFactory
     {
-        public IntermecFactory()
+        public Task<Label> CreateAsync(string label)
         {
-            
-        }
-        public Task<string> CreateAsync(IList<Token> tokens)
-        {
-            var converter = ConverterFactory.Create(LabelType.Intermec);
-            foreach (var token in tokens)
-            {
-                
-            }
-            return null;
+            throw new System.NotImplementedException();
         }
     }
 }

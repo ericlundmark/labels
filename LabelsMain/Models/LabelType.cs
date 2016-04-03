@@ -2,6 +2,6 @@
 {
     public enum LabelType
     {
-        Zebra, Intermec
+        Zebra, Intermec, Monarch
     }
 }

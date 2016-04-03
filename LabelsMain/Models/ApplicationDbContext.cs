@@ -1,20 +1,18 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using LabelConverter.Models;
-using LabelsMain.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace LabelConverter
+namespace LabelsMain.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
             : base("DefaultConnection", false)
         {
-            //Database.SetInitializer<ApplicationDbContext>(null);
+            Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseAlways<ApplicationDbContext>());
         }
 
-        public virtual DbSet<LabelViewModel> Spreadsheets { get; set; }
+        public virtual DbSet<Label> Labels { get; set; }
 
         public static ApplicationDbContext Create()
         {

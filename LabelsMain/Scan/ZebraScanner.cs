@@ -16,10 +16,30 @@ namespace LabelsMain.Scan
 
         private Token ExtractToken(string rawCommand)
         {
-            var command = rawCommand.Substring(0, 2);
-            var rawParams = rawCommand.Remove(0, 2);
-            var parameters = rawParams.Split(',');
-            return new Token(command, parameters);
+            if (OneLetterCommand(rawCommand))
+            {
+                var command = rawCommand.Substring(0, 1);
+                var rawParams = rawCommand.Remove(0, 1);
+                var parameters = rawParams.Split(',');
+                return new Token(command, parameters);
+            }
+            else
+            {
+                var command = rawCommand.Substring(0, 2);
+                var rawParams = rawCommand.Remove(0, 2);
+                if (rawParams.Equals(""))
+                {
+                    return new Token(command);
+                }
+                var parameters = rawParams.Split(',').ToArray();
+                return new Token(command, parameters);
+            }
+            
+        }
+
+        private bool OneLetterCommand(string rawCommand)
+        {
+            return rawCommand[0].Equals('A');
         }
     }
 }

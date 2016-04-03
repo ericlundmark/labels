@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelConverter.UnitTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelsMain", "LabelsMain\LabelsMain.csproj", "{D9CDF4BF-D6F5-4E4B-AE6D-293B3D1262F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{EBF73383-8B51-48AD-89AE-78D47DE36CA6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Repository\Services.csproj", "{EBF73383-8B51-48AD-89AE-78D47DE36CA6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelConverter.IntegrationTests", "LabelConverter.IntegrationTests\LabelConverter.IntegrationTests.csproj", "{C48B735C-8C8A-41F7-83C5-44124295CB2C}"
 EndProject

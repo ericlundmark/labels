@@ -1,5 +1,4 @@
 ﻿using System;
-using LabelsMain.Factory;
 using LabelsMain.Models;
 
 namespace LabelsMain.Convert

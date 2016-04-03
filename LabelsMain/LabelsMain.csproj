@@ -38,6 +38,14 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -57,16 +65,29 @@
     <Compile Include="Create\IntermecFactory.cs" />
     <Compile Include="Create\LabelFactory.cs" />
     <Compile Include="Convert\ZebraConverter.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Items\Barcode.cs" />
+    <Compile Include="Models\Items\BarcodeType.cs" />
+    <Compile Include="Models\Items\InterpretationLocation.cs" />
+    <Compile Include="Models\Items\Orientation.cs" />
+    <Compile Include="Printers\IPrintable.cs" />
+    <Compile Include="Printers\IPrinter.cs" />
     <Compile Include="Models\Label.cs" />
     <Compile Include="Models\LabelItem.cs" />
+    <Compile Include="Printers\MonarchPrinter.cs" />
+    <Compile Include="Printers\Zebra300Printer.cs" />
+    <Compile Include="Printers\ZebraPrinter.cs" />
     <Compile Include="Models\Template.cs" />
     <Compile Include="Models\Tokens\Token.cs" />
     <Compile Include="Create\ZebraFactory.cs" />
     <Compile Include="Models\LabelType.cs" />
-    <Compile Include="Models\Tokens\TokenType.cs" />
     <Compile Include="Models\Items\Box.cs" />
     <Compile Include="Models\Items\Circle.cs" />
     <Compile Include="Models\Items\Diagonal.cs" />
+    <Compile Include="Parse\BarcodeFieldDefault.cs" />
+    <Compile Include="Parse\FieldContext.cs" />
+    <Compile Include="Parse\Font.cs" />
     <Compile Include="Parse\IParser.cs" />
     <Compile Include="Models\Items\TextField.cs" />
     <Compile Include="Parse\ZebraParser.cs" />

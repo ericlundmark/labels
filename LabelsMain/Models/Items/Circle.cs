@@ -1,22 +1,26 @@
 ﻿using System.Drawing;
+using LabelsMain.Printers;
 
 namespace LabelsMain.Models.Items
 {
-    internal class Circle : LabelItem
+    public class Circle : LabelItem
     {
-        private Color _color;
-        private int _diameter;
-        private int _thickness;
-        private int _x;
-        private int _y;
+        public Color Color { get; set; }
+        public int Diameter { get; set; }
+        public int Thickness { get; set; }
+        public Point Point { get; set; }
 
-        public Circle(int x, int y, int diameter, int thickness, Color color)
+        public Circle(Point point, int diameter, int thickness, Color color)
         {
-            _x = x;
-            _y = y;
-            _diameter = diameter;
-            _thickness = thickness;
-            _color = color;
+            Point = point;
+            Diameter = diameter;
+            Thickness = thickness;
+            Color = color;
+        }
+
+        public override void Print(IPrinter printer)
+        {
+            printer.Print(this);
         }
     }
 }

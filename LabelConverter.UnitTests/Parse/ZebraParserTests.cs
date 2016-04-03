@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using System.Linq;
+using LabelsMain.Models.Items;
 using LabelsMain.Parse;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -18,8 +20,8 @@ namespace LabelConverter.UnitTests.Parse
             Assert.AreEqual(1, label.Items.Count);
             var box = label.Items[0] as Box;
             Assert.IsNotNull(box);
-            Assert.AreEqual(box.X, 0);
-            Assert.AreEqual(box.Y, 0);
+            Assert.AreEqual(box.Point.X, 0);
+            Assert.AreEqual(box.Point.Y, 0);
             Assert.AreEqual(1, box.Width);
             Assert.AreEqual(1, box.Height);
             Assert.AreEqual(1, box.Thickness);
@@ -56,8 +58,8 @@ namespace LabelConverter.UnitTests.Parse
             Assert.AreEqual(1, label.Items.Count);
             var box = label.Items[0] as Box;
             Assert.IsNotNull(box);
-            Assert.AreEqual(10, box.X);
-            Assert.AreEqual(10, box.Y);
+            Assert.AreEqual(10, box.Point.X);
+            Assert.AreEqual(10, box.Point.Y);
         }
 
         [TestMethod]
@@ -71,8 +73,8 @@ namespace LabelConverter.UnitTests.Parse
             Assert.AreEqual(1, label.Items.Count);
             var box = label.Items[0] as Box;
             Assert.IsNotNull(box);
-            Assert.AreEqual(0, box.X);
-            Assert.AreEqual(0, box.Y);
+            Assert.AreEqual(0, box.Point.X);
+            Assert.AreEqual(0, box.Point.Y);
         }
 
         [TestMethod]
@@ -85,6 +87,28 @@ namespace LabelConverter.UnitTests.Parse
             var label = parser.Parse(tokens);
             Assert.IsNotNull(label);
             Assert.AreEqual(0, label.Items.Count);
+        }
+
+        [TestMethod]
+        public void Parse_InvertedCommand_RotationSetTo180()
+        {
+            var builder = new FluentZebraBuilder();
+            var tokens = builder.Invert().Build();
+
+            var parser = new ZebraParser();
+            var label = parser.Parse(tokens);
+            Assert.AreEqual(180, label.Rotation);
+        }
+
+        [TestMethod]
+        public void Parse_Font_ProceedingTextImpacted()
+        {
+            var builder = new FluentZebraBuilder();
+            var tokens = builder.Font().Build();
+
+            var parser = new ZebraParser();
+            var label = parser.Parse(tokens);
+            var text = label.Items.First();
         }
     }
 }
