@@ -49,7 +49,7 @@ namespace LabelsMain.Printers
 
         public void Print(Barcode barcode)
         {
-            _builder.Append($"B,{_fieldCount},# of char,fix/var,{Height - barcode.Point.Y},{barcode.Point.X},1,{barcode.Interpretation},{barcode.Height}, text, alignment, field rot, type, sep_height, segment | ");
+            _builder.AppendLine($"B,{_fieldCount},# of char,fix/var,{Height - barcode.Point.Y},{barcode.Point.X},1,{barcode.Interpretation},{barcode.Height}, text, alignment, field rot, type, sep_height, segment | ");
             _fieldCount++;
         }
 

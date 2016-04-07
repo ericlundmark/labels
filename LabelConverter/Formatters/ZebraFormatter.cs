@@ -22,7 +22,7 @@ namespace LabelConverter.Formatters
         }
         public override bool CanReadType(Type type)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public override bool CanWriteType(Type type)

@@ -35,24 +35,16 @@ namespace LabelConverter.Controllers
             var data = Convert.FromBase64String(label.Data);
             var decodedString = Encoding.UTF8.GetString(data);
             var l = await _labelService.CreateAsync(decodedString, label.Type);
-            var printer = new MonarchPrinter();
-            l.Print(printer);
-            var bytes = Encoding.UTF8.GetBytes(printer.ToString());
-            var b64label = Convert.ToBase64String(bytes);
-            return CreatedAtRoute("GetLabel", new { labelId = l.Id }, b64label);
-    }
+            return CreatedAtRoute("GetLabel", new { labelId = l.Id }, l);
+        }
 
-    [Route("{labelId:int}", Name = "GetLabel")]
-    [ResponseType(typeof(string))]
-    [HttpGet]
-    public async Task<IHttpActionResult> GetAsync(int labelId)
-    {
-        var label = await _labelService.GetAsync(labelId);
-        var printer = new Zebra300Printer();
-        label.Print(printer);
-        var bytes = Encoding.UTF8.GetBytes(printer.ToString());
-        var b64label = Convert.ToBase64String(bytes);
-        return Ok(b64label);
+        [Route("{labelId:int}", Name = "GetLabel")]
+        [ResponseType(typeof(string))]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetAsync(int labelId)
+        {
+            var label = await _labelService.GetAsync(labelId);
+            return Ok(label);
+        }
     }
-}
 }

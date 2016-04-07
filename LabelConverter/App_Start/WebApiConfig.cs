@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
+using LabelConverter.Formatters;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 
@@ -17,6 +18,9 @@ namespace LabelConverter
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
+            config.Formatters.Add(new MonarchFormatter());
+            config.Formatters.Add(new Zebra300Formatter());
+            config.Formatters.Add(new ZebraFormatter());
             // Web API routes
             config.MapHttpAttributeRoutes();
 
