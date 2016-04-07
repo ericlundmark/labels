@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Text;
 using LabelsMain.Models;
 using LabelsMain.Models.Items;
-using LabelsMain.Parse;
 
 namespace LabelsMain.Printers
 {
     public class MonarchPrinter : IPrinter
     {
         private readonly StringBuilder _builder = new StringBuilder();
-        private List<LabelItem> _fields = new List<LabelItem>();
+        private readonly List<LabelItem> _fields = new List<LabelItem>();
         public int Height => 1218;
         public int Width => 768;
+
         public void Print(Box printable)
         {
-            _builder.AppendLine($"Q,{Height - printable.Point.Y},{printable.Point.X},{Height - printable.Point.Y + printable.Height},{printable.Point.X + printable.Width},{printable.Thickness},\"\" |");
+            _builder.AppendLine(
+                $"Q,{Height - printable.Point.Y},{printable.Point.X},{Height - printable.Point.Y + printable.Height},{printable.Point.X + printable.Width},{printable.Thickness},\"\" |");
         }
 
         public void Print(Circle printable)
@@ -46,14 +47,15 @@ namespace LabelsMain.Printers
                 .AppendLine("{B,1,N,1 |");
             foreach (var field in _fields)
             {
-                _builder.AppendLine($"B,{_fields.IndexOf(field) + 1} |");
+                _builder.AppendLine($"{_fields.IndexOf(field) + 1}, \"\" |");
             }
             _builder.AppendLine("}");
         }
 
         public void Print(Barcode barcode)
         {
-            _builder.AppendLine($"B,{_fields.Count + 1},# of char,fix/var,{Height - barcode.Point.Y},{barcode.Point.X},1,{barcode.Interpretation},{barcode.Height}, text, alignment, field rot, type, sep_height, segment | ");
+            _builder.AppendLine(
+                $"B,{_fields.Count + 1},# of char,fix/var,{Height - barcode.Point.Y},{barcode.Point.X},1,{barcode.Interpretation},{barcode.Height}, text, alignment, field rot, type, sep_height, segment | ");
             _fields.Add(barcode);
         }
 
